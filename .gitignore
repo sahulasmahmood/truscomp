@@ -30,6 +30,10 @@ out/
 *.swo
 .DS_Store
 
+# Qodo Agents
+.qodo/agents/
+.agents/
+
 # Logs
 logs/
 *.log

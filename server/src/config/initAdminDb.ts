@@ -33,7 +33,7 @@ const initAdminDb = async () => {
             // Password is 'admin123'
             await pool.query(`
                 INSERT INTO admins (name, email, password_hash, role)
-                VALUES ('System Administrator', 'admin@truscomp.com', '$2b$10$L7Wd8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z', 'admin')
+                VALUES ('System Administrator', 'admin@truscomp.com', '$2b$10$cMBCFmhPIsSNsXsWfnjzje/OQ4ubmVJqTWlG8Ficu73pNoWrN2zgW', 'admin')
             `);
         }
 
