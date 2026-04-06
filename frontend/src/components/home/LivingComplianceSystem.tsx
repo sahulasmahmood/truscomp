@@ -1,5 +1,7 @@
+'use client'
+
 import { useRef, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 import { cn } from "@/lib/utils";
 
 // ----- SERVICE DATA -----
@@ -193,7 +195,7 @@ const ServiceLabel = ({
 
     return (
         <Link
-            to={`/services/${service.id}`}
+            href={`/services/${service.id}`}
             className={cn(
                 "absolute hidden lg:block transition-all duration-700 cursor-pointer",
                 isVisible ? "opacity-100" : "opacity-0 translate-y-4",
@@ -359,7 +361,7 @@ const MobileServiceItem = ({
                             ))}
                         </div>
                         <Link
-                            to={`/services/${service.id}`}
+                            href={`/services/${service.id}`}
                             className="inline-flex items-center text-xs font-bold text-primary hover:underline"
                             onClick={(e) => e.stopPropagation()}
                         >
@@ -373,7 +375,7 @@ const MobileServiceItem = ({
 };
 
 // ----- MAIN COMPONENT -----
-const LivingComplianceSystem = () => {
+const LivingComplianceSystem = (_props: Record<string, unknown> = {}) => {
     const sectionRef = useRef<HTMLDivElement>(null);
     const [isInView, setIsInView] = useState(false);
     const [activeService, setActiveService] = useState<string | null>(null);
@@ -477,7 +479,7 @@ const LivingComplianceSystem = () => {
                 style={{ transitionDelay: '600ms' }}
             >
                 <Link
-                    to="/services"
+                    href="/services"
                     className="group relative inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden hover:scale-105"
                 >
                     {/* Glow */}

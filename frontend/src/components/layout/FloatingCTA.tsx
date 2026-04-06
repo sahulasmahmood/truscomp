@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+'use client'
+
+import Link from 'next/link';
 import { MessageCircle, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSettings } from "@/hooks/useSettings";
@@ -47,7 +49,7 @@ const FloatingCTA = () => {
             "w-11 h-11 p-0 md:w-auto md:h-11 md:px-5"
           )}
         >
-          <Link to="/contact" className="flex items-center gap-1.5">
+          <Link href="/contact" className="flex items-center gap-1.5">
             <MessageCircle className="w-5 h-5 md:w-4 md:h-4 flex-shrink-0" />
             <span className="hidden md:inline text-sm whitespace-nowrap">Need Help?</span>
           </Link>

@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+'use client'
+
+import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, Sparkles } from "lucide-react";
 import AnimatedSection from "@/components/ui/animated-section";
@@ -40,7 +42,7 @@ const CTASection = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="btn-primary text-base group">
-              <Link to="/contact">
+              <Link href="/contact">
                 <Calendar className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
                 Book Free Consultation
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -52,7 +54,7 @@ const CTASection = () => {
               variant="outline" 
               className="bg-transparent border-background/30 text-background hover:bg-background/10 hover:border-background/50 text-base group backdrop-blur-sm"
             >
-              <Link to="/services">
+              <Link href="/services">
                 Explore Services
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>

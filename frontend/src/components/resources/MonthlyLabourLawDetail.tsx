@@ -1,4 +1,7 @@
-import { useParams, useNavigate, Link } from "react-router-dom";
+'use client'
+
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from "framer-motion";
 import { ArrowLeft, Download, Play, Calendar, FileText, CheckCircle2, User, ChevronRight, ArrowRight, Sparkles, Copy, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -39,14 +42,13 @@ interface LabourLawUpdate {
     videos: Array<{ title: string; url: string }>;
 }
 
-const MonthlyLabourLawDetail = () => {
-    const { id } = useParams();
+const MonthlyLabourLawDetail = ({ id }: { id: string }) => {
     // Extract numeric ID from the labour-{id} format or use as is
     const numericId = id?.startsWith('labour-') ? id.replace('labour-', '') : id;
 
     useSEO("labour_law_update", numericId);
 
-    const navigate = useNavigate();
+    const router = useRouter();
     const [resource, setResource] = useState<LabourLawUpdate | null>(null);
     const [loading, setLoading] = useState(true);
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
@@ -70,7 +72,7 @@ const MonthlyLabourLawDetail = () => {
     useEffect(() => {
         const fetchUpdate = async () => {
             try {
-                const apiBase = import.meta.env.VITE_API_BASE_URL || "";
+                const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "";
                 const response = await fetch(`${apiBase}/labour-law-updates/${numericId}`);
                 if (response.ok) {
                     const data = await response.json();
@@ -136,7 +138,7 @@ const MonthlyLabourLawDetail = () => {
         return (
             <div className="flex flex-col items-center justify-center min-h-[60vh]">
                 <h2 className="text-2xl font-bold text-gray-900">Resource Not Found</h2>
-                <button onClick={() => navigate("/resources")} className="mt-4 text-[#FF8C00] hover:underline">
+                <button onClick={() => router.push("/resources")} className="mt-4 text-[#FF8C00] hover:underline">
                     Back to Resources
                 </button>
             </div>
@@ -164,7 +166,7 @@ const MonthlyLabourLawDetail = () => {
 
                     <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <button
-                            onClick={() => navigate("/resources")}
+                            onClick={() => router.push("/resources")}
                             className="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-[#FF8C00] transition-colors mb-8"
                         >
                             <ArrowLeft className="w-4 h-4" />
@@ -504,11 +506,11 @@ const MonthlyLabourLawDetail = () => {
                             viewport={{ once: true }}
                             transition={{ delay: 0.2 }}
                         >
-                            <Link to="/contact" className="w-full sm:w-auto px-8 py-4 bg-[#FF8C00] text-white font-bold rounded-xl shadow-[0_0_20px_rgba(255,140,0,0.3)] hover:bg-orange-600 hover:shadow-[0_0_30px_rgba(255,140,0,0.5)] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+                            <Link href="/contact" className="w-full sm:w-auto px-8 py-4 bg-[#FF8C00] text-white font-bold rounded-xl shadow-[0_0_20px_rgba(255,140,0,0.3)] hover:bg-orange-600 hover:shadow-[0_0_30px_rgba(255,140,0,0.5)] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
                                 Book Free Consultation
                                 <ChevronRight className="w-5 h-5 stroke-[3]" />
                             </Link>
-                            <Link to="/services" className="w-full sm:w-auto px-8 py-4 bg-transparent border border-gray-600 text-white font-semibold rounded-xl hover:bg-white hover:text-gray-900 hover:border-white transition-all duration-300 text-center">
+                            <Link href="/services" className="w-full sm:w-auto px-8 py-4 bg-transparent border border-gray-600 text-white font-semibold rounded-xl hover:bg-white hover:text-gray-900 hover:border-white transition-all duration-300 text-center">
                                 Explore Services
                             </Link>
                         </motion.div>

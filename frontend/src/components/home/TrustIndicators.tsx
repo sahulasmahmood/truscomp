@@ -1,3 +1,5 @@
+'use client'
+
 import { Award, Users, Building2, Calendar } from "lucide-react";
 import AnimatedCounter from "@/components/ui/animated-counter";
 import AnimatedSection from "@/components/ui/animated-section";

@@ -1,5 +1,7 @@
+'use client'
+
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 import { motion } from "framer-motion";
 import { Sparkles, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -20,7 +22,7 @@ const NotificationTicker = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const apiBase = import.meta.env.VITE_API_BASE_URL || "/api/v1";
+                const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "/api/v1";
                 console.log(`[NotificationTicker] Fetching from: ${apiBase}/labour-law-updates`);
                 const response = await fetch(`${apiBase}/labour-law-updates?limit=10&status=active`);
 
@@ -88,7 +90,7 @@ const NotificationTicker = () => {
                     {(notifications.length > 1 ? [...notifications, ...notifications] : notifications).map((item, idx) => (
                         <Link
                             key={`${item.id}-${idx}`}
-                            to={item.link}
+                            href={item.link}
                             className="flex items-center gap-2 group/item py-2"
                         >
                             <span className="text-sm md:text-base font-medium text-gray-700 group-hover/item:text-primary transition-colors flex items-center gap-2 min-w-max">

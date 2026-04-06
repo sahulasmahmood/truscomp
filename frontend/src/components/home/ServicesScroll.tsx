@@ -1,5 +1,7 @@
+'use client'
+
 import { useRef, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 import { ArrowRight, CheckCircle2, FileCheck, Search, Calculator, BookOpen, ShieldCheck } from "lucide-react";
 import LivingComplianceSystem from "./LivingComplianceSystem";
 
@@ -271,7 +273,7 @@ const ServicesMobile = () => {
 
                 <div className="pt-6 text-center">
                     <Link
-                        to="/services"
+                        href="/services"
                         className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all"
                     >
                         View Complete Services

@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from "react";
 import { StateHolidayList, HOLIDAY_DATA } from "@/data/resourcesData";
 import { cn } from "@/lib/utils";

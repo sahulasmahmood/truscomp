@@ -1,3 +1,5 @@
+'use client'
+
 import { motion } from "framer-motion";
 import { Shield, FileText, Scale, CheckCircle2, Share2 } from "lucide-react";
 

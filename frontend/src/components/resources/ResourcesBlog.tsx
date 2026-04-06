@@ -1,6 +1,8 @@
+'use client'
+
 import { useState, useEffect } from "react";
 import { ArrowRight, Clock, Sparkles, TrendingUp, BookOpen, RotateCw } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 import { motion } from "framer-motion";
 
 const ResourcesBlog = () => {
@@ -10,7 +12,7 @@ const ResourcesBlog = () => {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const apiBase = import.meta.env.VITE_API_BASE_URL || "/api/v1";
+                const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "/api/v1";
                 console.log(`[ResourcesBlog] Fetching from: ${apiBase}/blogs`);
                 const response = await fetch(`${apiBase}/blogs?limit=20&status=active`);
                 if (response.ok) {
@@ -115,7 +117,7 @@ const ResourcesBlog = () => {
 
                             <div className="flex flex-wrap items-center gap-6">
                                 <Link
-                                    to={`/blog/${featuredPost.slug || featuredPost.id}`}
+                                    href={`/blog/${featuredPost.slug || featuredPost.id}`}
                                     className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 rounded-full font-semibold hover:bg-primary hover:text-white transition-all duration-300 group/btn"
                                 >
                                     Read Full Article
@@ -148,7 +150,7 @@ const ResourcesBlog = () => {
                                 transition={{ duration: 0.4, delay: index * 0.1 }}
                             >
                                 <Link
-                                    to={`/blog/${post.slug || post.id}`}
+                                    href={`/blog/${post.slug || post.id}`}
                                     className="group block relative pl-0 md:pl-8 py-6 border-b border-gray-100 last:border-b-0 hover:bg-gradient-to-r hover:from-primary/5 hover:to-transparent transition-all duration-300"
                                 >
                                     {/* Timeline Dot */}

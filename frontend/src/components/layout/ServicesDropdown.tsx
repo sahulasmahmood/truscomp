@@ -1,5 +1,8 @@
+'use client'
+
 import { useState, useRef, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -15,7 +18,7 @@ const ServicesDropdown = ({ isMobile = false }: ServicesDropdownProps) => {
     useEffect(() => {
         const fetchServices = async () => {
             try {
-                const apiBase = import.meta.env.VITE_API_BASE_URL || "";
+                const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "";
                 const response = await fetch(`${apiBase}/services?public_view=true`);
                 if (response.ok) {
                     const data = await response.json();
@@ -31,8 +34,8 @@ const ServicesDropdown = ({ isMobile = false }: ServicesDropdownProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-    const location = useLocation();
-    const isServicesActive = location.pathname.startsWith("/services");
+    const pathname = usePathname();
+    const isServicesActive = pathname.startsWith("/services");
 
     // Close dropdown when clicking outside
     useEffect(() => {
@@ -54,7 +57,7 @@ const ServicesDropdown = ({ isMobile = false }: ServicesDropdownProps) => {
     // Close dropdown on route change
     useEffect(() => {
         setIsOpen(false);
-    }, [location.pathname]);
+    }, [pathname]);
 
     // Handle keyboard navigation
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -108,7 +111,7 @@ const ServicesDropdown = ({ isMobile = false }: ServicesDropdownProps) => {
                             {services.map((service) => (
                                 <div key={service.id} className="break-inside-avoid md:mb-1">
                                     <Link
-                                        to={`/services/${service.slug}`}
+                                        href={`/services/${service.slug}`}
                                         onClick={() => setIsOpen(false)}
                                         className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all duration-200"
                                     >
@@ -118,7 +121,7 @@ const ServicesDropdown = ({ isMobile = false }: ServicesDropdownProps) => {
                             ))}
                             <div className="break-inside-avoid md:mb-1">
                                 <Link
-                                    to="/services/gcc"
+                                    href="/services/gcc"
                                     onClick={() => setIsOpen(false)}
                                     className="block px-4 py-2.5 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all duration-200"
                                 >
@@ -127,7 +130,7 @@ const ServicesDropdown = ({ isMobile = false }: ServicesDropdownProps) => {
                             </div>
                             <div className="break-inside-avoid mt-2 md:mt-0 md:pt-2">
                                 <Link
-                                    to="/services"
+                                    href="/services"
                                     onClick={() => setIsOpen(false)}
                                     className="block px-4 py-2.5 text-sm font-semibold text-primary hover:bg-primary/10 rounded-lg transition-all duration-200 text-center md:text-left"
                                 >
@@ -164,7 +167,7 @@ const ServicesDropdown = ({ isMobile = false }: ServicesDropdownProps) => {
         >
             {/* Parent Services link */}
             <Link
-                to="/services"
+                href="/services"
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-1.5 focus:outline-none
           ${isServicesActive
                         ? "text-primary bg-primary/10"
@@ -210,7 +213,7 @@ const ServicesDropdown = ({ isMobile = false }: ServicesDropdownProps) => {
                                         {col.map((item) => (
                                             <Link
                                                 key={item.id}
-                                                to={item.isAction ? '/services' : `/services/${item.slug}`}
+                                                href={item.isAction ? '/services' : `/services/${item.slug}`}
                                                 className={`group block py-1.5 text-[14px] leading-[20px] transition-all duration-200 
                                                     ${item.isAction ? 'font-semibold text-primary' : 'text-muted-foreground'}
                                                 `}

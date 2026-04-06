@@ -1,3 +1,5 @@
+'use client'
+
 import { Building2, Sparkles } from "lucide-react";
 import AnimatedSection from "@/components/ui/animated-section";
 
@@ -12,14 +14,14 @@ import fischerLogo from "@/assets/fischer-7.png";
 import sankarLogo from "@/assets/sanker-8.png";
 
 const clients = [
-  { name: "EUCARE", logo: eucareLogo },
-  { name: "YULU", logo: yuluLogo },
-  { name: "YUMA", logo: yumaLogo },
-  { name: "Apollo Hospitals", logo: apolloLogo },
-  { name: "KICL", logo: kothariLogo },
-  { name: "Sanofi", logo: sanofiLogo },
-  { name: "Fischer", logo: fischerLogo },
-  { name: "Sankar", logo: sankarLogo },
+  { name: "EUCARE", logo: eucareLogo.src },
+  { name: "YULU", logo: yuluLogo.src },
+  { name: "YUMA", logo: yumaLogo.src },
+  { name: "Apollo Hospitals", logo: apolloLogo.src },
+  { name: "KICL", logo: kothariLogo.src },
+  { name: "Sanofi", logo: sanofiLogo.src },
+  { name: "Fischer", logo: fischerLogo.src },
+  { name: "Sankar", logo: sankarLogo.src },
 ];
 
 const ClientLogos = () => {

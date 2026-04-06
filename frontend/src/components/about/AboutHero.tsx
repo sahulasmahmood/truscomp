@@ -1,3 +1,5 @@
+'use client'
+
 import { motion } from "framer-motion";
 import { TrustComplianceVisual } from "./TrustComplianceVisual";
 import { TopologyBackground } from "../ui/topology-background";

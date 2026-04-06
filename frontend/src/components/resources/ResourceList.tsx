@@ -1,6 +1,8 @@
+'use client'
+
 import { ResourceItem } from "@/data/resourcesData";
 import { Download, Calendar, MapPin, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from 'next/navigation';
 import * as Icons from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import * as React from "react";
@@ -13,7 +15,7 @@ const ResourceList = ({ resources }: ResourceListProps) => {
     // Pagination State
     const [currentPage, setCurrentPage] = React.useState(1);
     const itemsPerPage = 8;
-    const navigate = useNavigate();
+    const router = useRouter();
 
     const totalPages = Math.ceil(resources.length / itemsPerPage);
     const paginatedResources = resources.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -68,7 +70,7 @@ const ResourceList = ({ resources }: ResourceListProps) => {
 
                                 {resource.category === "Labour Law Updates" ? (
                                     <button
-                                        onClick={() => navigate(`/resources/monthly-labour-law/${resource.id}`)}
+                                        onClick={() => router.push(`/resources/monthly-labour-law/${resource.id}`)}
                                         className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-[#FF8C00] rounded-lg hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/20 group-hover:shadow-orange-500/30 group-hover:-translate-y-0.5"
                                     >
                                         Read More

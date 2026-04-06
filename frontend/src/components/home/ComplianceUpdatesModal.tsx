@@ -1,5 +1,7 @@
+'use client'
+
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 import {
     Search,
     X,
@@ -96,7 +98,7 @@ const ComplianceUpdatesModal = ({ open, onOpenChange }: ComplianceUpdatesModalPr
         const fetchAllUpdates = async () => {
             setLoading(true);
             try {
-                const apiBase = import.meta.env.VITE_API_BASE_URL || "";
+                const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "";
                 const [resResponse, lawResponse, blogResponse] = await Promise.all([
                     fetch(`${apiBase}/resources`),
                     fetch(`${apiBase}/labour-law-updates`),
@@ -273,7 +275,7 @@ const ComplianceUpdatesModal = ({ open, onOpenChange }: ComplianceUpdatesModalPr
                                             {update.summary}
                                         </p>
                                         <Link
-                                            to={update.link}
+                                            href={update.link}
                                             onClick={() => onOpenChange(false)}
                                             className={cn(
                                                 "inline-flex items-center gap-1.5 text-xs font-semibold text-primary",
@@ -306,7 +308,7 @@ const ComplianceUpdatesModal = ({ open, onOpenChange }: ComplianceUpdatesModalPr
                         "hover:shadow-glow hover:-translate-y-1 active:scale-[0.98]"
                     )}
                 >
-                    <Link to="/resources" onClick={() => onOpenChange(false)}>
+                    <Link href="/resources" onClick={() => onOpenChange(false)}>
                         View All Updates
                         <ArrowRight className="w-4 h-4 ml-2" />
                     </Link>

@@ -1,5 +1,7 @@
+'use client'
+
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 
 interface SEOData {
     meta_title: string;
@@ -31,13 +33,13 @@ const DEFAULT_SEO: SEOData = {
 
 export const useSEO = (pageType: string, referenceId?: string) => {
     const [seo, setSeo] = useState<SEOData | null>(null);
-    const location = useLocation();
+    const pathname = usePathname();
 
     useEffect(() => {
         const fetchSEO = async () => {
             try {
                 // Use relative URL to leverage Vite proxy
-                const apiBase = import.meta.env.VITE_API_BASE_URL || "";
+                const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "";
                 const url = new URL(`${apiBase}/seo/public`, window.location.origin);
                 url.searchParams.append('page_type', pageType);
                 if (referenceId) {
@@ -64,7 +66,7 @@ export const useSEO = (pageType: string, referenceId?: string) => {
         fetchSEO();
 
         // Cleanup function can be added if needed, but updateHead is idempotent
-    }, [pageType, referenceId, location.pathname]);
+    }, [pageType, referenceId, pathname]);
 
     const updateHead = (data: SEOData) => {
         // Use provided data or fallback to defaults for individual fields
@@ -76,7 +78,7 @@ export const useSEO = (pageType: string, referenceId?: string) => {
         updateMetaTag('robots', data.robots || DEFAULT_SEO.robots);
 
         // Canonical
-        const canonicalUrl = data.canonical_url || `${DEFAULT_SEO.canonical_url}${location.pathname}`;
+        const canonicalUrl = data.canonical_url || `${DEFAULT_SEO.canonical_url}${pathname}`;
         let canonical = document.querySelector('link[rel="canonical"]');
         if (!canonical) {
             canonical = document.createElement('link');

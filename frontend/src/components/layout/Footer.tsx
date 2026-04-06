@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+'use client'
+
+import Link from "next/link";
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
 import logo from "@/assets/truscomp-logo.webp";
 import { useSettings } from "@/hooks/useSettings";
@@ -34,7 +36,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Company Info */}
           <div className="lg:col-span-1">
-            <img src={settings?.website_logo || logo} alt="TrusComp" className="h-10 w-auto mb-4 brightness-0 invert" />
+            <img src={settings?.website_logo || logo.src} alt="TrusComp" className="h-10 w-auto mb-4 brightness-0 invert" />
             <p className="text-background/70 text-sm leading-relaxed mb-4">
               Technology-driven labor law compliance solutions. Your trusted partner for regulatory excellence.
             </p>
@@ -93,7 +95,7 @@ const Footer = () => {
               {quickLinks.map((link) => (
                 <li key={link.path}>
                   <Link
-                    to={link.path}
+                    href={link.path}
                     className="text-sm text-background/70 hover:text-primary transition-colors duration-200"
                   >
                     {link.name}
@@ -110,7 +112,7 @@ const Footer = () => {
               {resourceLinks.map((link) => (
                 <li key={link.path}>
                   <Link
-                    to={link.path}
+                    href={link.path}
                     className="text-sm text-background/70 hover:text-primary transition-colors duration-200"
                   >
                     {link.name}
@@ -159,10 +161,10 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-background/10">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-background/60">
-            <p>© {currentYear}, TrusComp Pvt. Ltd. All Rights Reserved | Powered by  <Link to="https://mntfuture.com" className="hover:text-primary transition-colors">MnT</Link></p>
+            <p>© {currentYear}, TrusComp Pvt. Ltd. All Rights Reserved | Powered by  <Link href="https://mntfuture.com" className="hover:text-primary transition-colors">MnT</Link></p>
             <div className="flex gap-6">
-              <Link to="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link>
-              <Link to="/terms-conditions" className="hover:text-primary transition-colors">Terms & Conditions</Link>
+              <Link href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+              <Link href="/terms-conditions" className="hover:text-primary transition-colors">Terms & Conditions</Link>
             </div>
           </div>
         </div>

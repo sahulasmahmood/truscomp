@@ -1,5 +1,7 @@
+'use client'
+
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 import { ArrowRight, Sparkles, Shield, CheckCircle2 } from "lucide-react";
 import AnimatedSection from "@/components/ui/animated-section";
 
@@ -51,7 +53,7 @@ const AboutCTA = () => {
                             size="lg"
                             className="relative h-14 px-10 text-lg rounded-full btn-primary group-hover:scale-105 transition-all duration-300"
                         >
-                            <Link to="/contact" className="flex items-center gap-3">
+                            <Link href="/contact" className="flex items-center gap-3">
                                 <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
                                 Take the First Step
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

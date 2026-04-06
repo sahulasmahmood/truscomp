@@ -1,5 +1,7 @@
+'use client'
+
 import { useRef, useEffect, useState, useCallback } from "react";
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 import { cn } from "@/lib/utils";
 
 // ----- SERVICE DATA -----
@@ -260,7 +262,7 @@ const FinalCTA = ({ isVisible }: { isVisible: boolean }) => (
         )}
     >
         <Link
-            to="/services"
+            href="/services"
             className="group relative px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
         >
             <span className="relative z-10">Explore All Services →</span>

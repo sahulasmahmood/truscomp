@@ -1,6 +1,8 @@
+'use client'
+
 import { Shield, Award, Settings, TrendingUp, ArrowRight } from "lucide-react";
 import AnimatedSection from "@/components/ui/animated-section";
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 
 const pillars = [
   {
@@ -85,7 +87,7 @@ const WhyChooseUs = () => {
         {/* CTA */}
         <AnimatedSection delay={400} className="text-center mt-12">
           <Link 
-            to="/about" 
+            href="/about" 
             className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all group"
           >
             Learn More About Us

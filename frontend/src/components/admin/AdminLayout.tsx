@@ -1,5 +1,8 @@
+'use client'
+
 import React, { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from "framer-motion";
 import {
     LayoutDashboard,
@@ -50,7 +53,7 @@ interface NavItemProps {
 
 const NavItem = ({ icon: Icon, label, path, active, collapsed }: NavItemProps) => {
     const content = (
-        <Link to={path}>
+        <Link href={path}>
             <div className={cn(
                 "flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 group relative",
                 active
@@ -83,8 +86,8 @@ const NavItem = ({ icon: Icon, label, path, active, collapsed }: NavItemProps) =
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
     const [collapsed, setCollapsed] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const location = useLocation();
-    const navigate = useNavigate();
+    const pathname = usePathname();
+    const router = useRouter();
     const { data: settings } = useSettings();
 
     const navItems = [
@@ -99,11 +102,12 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         { label: "System Settings", icon: Settings, path: "/admin/settings" },
     ];
 
-    const currentPath = location.pathname;
+    const currentPath = pathname;
 
     const handleLogout = () => {
         localStorage.removeItem("adminToken");
-        navigate("/admin/login", { replace: true });
+        document.cookie = 'adminToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        router.replace("/admin/login");
     };
 
     return (
@@ -116,10 +120,10 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                 )}>
                     {/* Sidebar Header */}
                     <div className={cn("h-16 flex items-center border-b border-slate-100 transition-all", collapsed ? "justify-center px-0" : "px-6")}>
-                        <Link to="/admin/dashboard" className="flex items-center gap-3 overflow-hidden relative">
+                        <Link href="/admin/dashboard" className="flex items-center gap-3 overflow-hidden relative">
                             {/* Full Logo (Expanded) */}
                             <img
-                                src={settings?.dashboard_logo || logo}
+                                src={settings?.dashboard_logo || logo.src}
                                 alt="TrusComp Logo"
                                 className={cn(
                                     "h-8 w-auto transition-all duration-300 object-contain",
@@ -194,7 +198,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                                 className="fixed inset-y-0 left-0 w-72 bg-white z-50 lg:hidden flex flex-col shadow-2xl"
                             >
                                 <div className="h-16 flex items-center justify-between px-6 border-b border-slate-100">
-                                    <Link to="/admin/dashboard" className="flex items-center gap-3">
+                                    <Link href="/admin/dashboard" className="flex items-center gap-3">
                                         <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                                             <ShieldCheck className="w-5 h-5 text-white" />
                                         </div>

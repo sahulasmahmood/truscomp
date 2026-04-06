@@ -1,10 +1,12 @@
+'use client'
+
 import { useQuery } from "@tanstack/react-query";
 
 export const useSettings = () => {
     return useQuery({
         queryKey: ['settings'],
         queryFn: async () => {
-            const apiBase = import.meta.env.VITE_API_BASE_URL || "";
+            const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "";
             const response = await fetch(`${apiBase}/settings`);
             if (!response.ok) throw new Error('Failed to fetch settings');
             return response.json();

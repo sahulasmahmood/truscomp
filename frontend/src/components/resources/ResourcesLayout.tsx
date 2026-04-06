@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from "react";
 import { ResourceItem, ResourceCategory } from "@/data/resourcesData";
 import CategorySidebar from "./CategorySidebar";
@@ -14,7 +16,7 @@ const ResourcesLayout = () => {
     useEffect(() => {
         const fetchResources = async () => {
             try {
-                const apiBase = import.meta.env.VITE_API_BASE_URL || "";
+                const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "";
                 // Fetch regular resources
                 const resourcesResponse = await fetch(`${apiBase}/resources?limit=1000`);
 

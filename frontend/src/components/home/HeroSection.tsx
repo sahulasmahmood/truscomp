@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+'use client'
+
+import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Zap } from "lucide-react";
 import FloatingShapes from "@/components/ui/floating-shapes";
@@ -48,7 +50,7 @@ const HeroSection = () => {
             {/* CTAs */}
             <div className="animate-fade-in-up animation-delay-300 flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="btn-primary text-base group">
-                <Link to="/contact">
+                <Link href="/contact">
                   Book Free Consultation
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>

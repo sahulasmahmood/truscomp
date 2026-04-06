@@ -1,3 +1,5 @@
+'use client'
+
 import { ResourceCategory, ResourceItem } from "@/data/resourcesData";
 import ResourceList from "./ResourceList";
 import HolidayViewer from "./HolidayViewer";
